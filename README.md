@@ -3,7 +3,7 @@
 
 Usage (in sh, from root of project):
 ```console
-./gradlew
+./gradlew build
 cd build/classes/kotlin/main/
 kotlin MainKt.class ../../../../songs/*.txt # any song file(s)
 ```
