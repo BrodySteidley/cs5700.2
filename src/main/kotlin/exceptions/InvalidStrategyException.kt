@@ -1,4 +1,4 @@
 package exceptions
 
-open class InvalidStrategyException(waveName : String) : RuntimeException("Invalid Wave Strategy \"$waveName\"")
+open class InvalidStrategyException(waveName: String) : RuntimeException("Invalid Wave Strategy \"$waveName\"")
 

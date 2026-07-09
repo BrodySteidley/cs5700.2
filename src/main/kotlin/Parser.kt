@@ -4,6 +4,7 @@ import exceptions.HeaderParseException
 import java.io.File
 
 import exceptions.MeasureParseException
+import exceptions.SongFileException
 
 object Parser {
 
@@ -79,6 +80,9 @@ object Parser {
 
             samples.add(parseChannel(line, sampleRate, beatsPerMeasure, tempo));
         }
+
+        if (samples.isEmpty())
+            throw SongFileException("No channels");
 
         return Song.createFromChannels(sampleRate, samples);
     }

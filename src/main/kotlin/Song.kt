@@ -16,7 +16,7 @@ class Song(
             return mixed
         }
 
-        fun createFromChannels(sampleRate : Int, channels : List<DoubleArray>) : Song = Song(sampleRate, mix(channels))
+        fun createFromChannels(sampleRate: Int, channels: List<DoubleArray>): Song = Song(sampleRate, mix(channels))
     }
 
     fun play() {
