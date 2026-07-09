@@ -5,6 +5,6 @@ Usage (in sh, from root of project):
 ```console
 ./gradlew
 cd build/classes/kotlin/main/
-kotlin MainKt.class ../../../../*.txt # any song file(s)
+kotlin MainKt.class ../../../../songs/*.txt # any song file(s)
 ```
 
