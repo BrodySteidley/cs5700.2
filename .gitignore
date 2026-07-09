@@ -1,0 +1,15 @@
+
+*.class
+*~
+*.log
+
+# gradle
+.gradle
+build
+
+# intellij
+*.iml
+.idea
+
+.kotlin
+
