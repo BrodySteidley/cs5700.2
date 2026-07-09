@@ -3,7 +3,7 @@ import java.io.IOException
 
 fun main(args: Array<String>) {
     if (args.isEmpty()) {
-        println("Program expects a single parameter:  a song file to play.")
+        println("Program expects at least one parameter:  a song file to play.")
         return
     }
 
