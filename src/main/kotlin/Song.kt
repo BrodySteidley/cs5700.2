@@ -1,19 +1,25 @@
 import javax.sound.sampled.AudioFormat
 import javax.sound.sampled.AudioSystem
 import javax.sound.sampled.SourceDataLine
+import kotlin.math.abs
 
 class Song(
     private val sampleRate: Int,
     private val samples: DoubleArray
 ) {
     companion object {
+        
         private fun mix(channels: List<DoubleArray>): DoubleArray {
             val length = channels.maxOf { it.size }
             val mixed = DoubleArray(length)
             for (channel in channels)
                 for (n in channel.indices)
                     mixed[n] += channel[n]
-            return mixed
+
+            /* normalize */
+            val peak = mixed.maxOfOrNull { abs(it) } ?: 0.0
+            if (peak == 0.0 || peak <= 1.0) return mixed    // silent, or already in range
+            return DoubleArray(mixed.size) { mixed[it] / peak }
         }
 
         fun createFromChannels(sampleRate: Int, channels: List<DoubleArray>): Song = Song(sampleRate, mix(channels))
