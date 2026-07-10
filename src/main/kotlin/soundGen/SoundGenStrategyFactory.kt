@@ -1,6 +1,6 @@
 package soundGen
 
-import exceptions.InvalidStrategyException
+import exceptions.InvalidSoundGenException
 
 object SoundGenStrategyFactory {
     fun createStrategy(waveName: String): SoundGenStrategy {
@@ -9,7 +9,7 @@ object SoundGenStrategyFactory {
             "saw" -> SawWaveStrategy()
             "square" -> SquareWaveStrategy()
             "whitenoise" -> WhiteNoiseStrategy()
-            else -> throw InvalidStrategyException(waveName)
+            else -> throw InvalidSoundGenException(waveName)
         }
     }
 }

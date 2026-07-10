@@ -1,8 +1,11 @@
 package channel
 
+import exceptions.EffectParseException
 import kotlin.math.tanh
 import org.junit.jupiter.api.Assertions.assertArrayEquals
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import soundGen.SoundGenStrategy
 
 class ChannelTest {
@@ -43,30 +46,29 @@ class ChannelTest {
     fun `VolumeDecorator multiplies samples by level`() {
         val channel = FakeChannel(doubleArrayOf(0.2, -0.4, 0.5))
 
-        val decorator = VolumeDecorator(channel, 2.0)
+        val decorator = VolumeDecorator(channel, 0.5)
 
         val result = decorator.generate(440.0, 1.0, 44100)
 
         assertArrayEquals(
-            doubleArrayOf(0.4, -0.8, 1.0),
+            doubleArrayOf(0.1, -0.2, 0.25),
             result,
             1e-9
         )
     }
 
     @Test
-    fun `VolumeDecorator clips values to valid range`() {
+    fun `VolumeDecorator throws error on invalid range`() {
         val channel = FakeChannel(doubleArrayOf(0.8, -0.8))
 
-        val decorator = VolumeDecorator(channel, 2.0)
+        assertThrows(EffectParseException::class.java) {
+            val decorator = VolumeDecorator(channel, 2.0)
+        }
+        assertThrows(EffectParseException::class.java) {
+            val decorator = VolumeDecorator(channel, -0.1)
+        }
 
-        val result = decorator.generate(440.0, 1.0, 44100)
-
-        assertArrayEquals(
-            doubleArrayOf(1.0, -1.0),
-            result,
-            1e-9
-        )
+        val decorator = VolumeDecorator(channel, 0.0);
     }
 
     @Test

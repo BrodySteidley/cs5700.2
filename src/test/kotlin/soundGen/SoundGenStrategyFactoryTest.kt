@@ -1,6 +1,6 @@
 package soundGen
 
-import exceptions.InvalidStrategyException
+import exceptions.InvalidSoundGenException
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
@@ -36,7 +36,7 @@ class SoundGenStrategyFactoryTest {
 
     @Test
     fun `throws exception for unknown strategy`() {
-        assertThrows(InvalidStrategyException::class.java) {
+        assertThrows(InvalidSoundGenException::class.java) {
             SoundGenStrategyFactory.createStrategy("triangle")
         }
     }

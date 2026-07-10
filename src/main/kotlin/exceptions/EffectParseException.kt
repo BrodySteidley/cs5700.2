@@ -1,4 +1,4 @@
 package exceptions
 
-class EffectParseException() : RuntimeException("Invalid effect title")
+class EffectParseException(message : String) : SongFileException("Invalid effect string: $message")
 
