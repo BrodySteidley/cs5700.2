@@ -66,7 +66,7 @@ object Parser {
 
         /* first line is the header, */
         val headerString = fileBuffer.readLine() ?: throw HeaderParseException("empty file");
-        val header = headerString.split(" ");
+	val header = headerString.trim().split(Regex("\\s+"))
 
         if (header.size != 3) throw HeaderParseException("invalid header length");
 

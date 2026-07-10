@@ -5,8 +5,8 @@ import soundGen.SoundGenStrategyFactory
 object ChannelFactory {
 
     fun createChannel(channelSettings: String): Channel {
-        val waveform: String = channelSettings.split(" ")[0];
-        val effects: List<String> = channelSettings.split(" ").drop(1);
+        val waveform: String = channelSettings.split(Regex("\\s+"))[0];
+        val effects: List<String> = channelSettings.split(Regex("\\s+")).drop(1);
 
         var channel: Channel = WaveformChannel(SoundGenStrategyFactory.createStrategy(waveform));
 
