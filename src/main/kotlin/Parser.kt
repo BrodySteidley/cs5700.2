@@ -12,12 +12,17 @@ object Parser {
         val settings = line.split("|")[0];
         val channel: Channel = ChannelFactory.createChannel(settings);
 
-        val measures = line.split("|").drop(1).dropLast(1);
+        val measures = line.split("|")
+            .drop(1)
+            .filter { it.isNotBlank() }
 
         val allSamples = mutableListOf<Double>()
 
         for ((measureIndex, measure) in measures.withIndex()) {
-            val parts = measure.split(" ");
+            val parts = measure.trim().split(Regex("\\s+"))
+            if (parts.size % 2 != 0) {
+                throw MeasureParseException(measureIndex, "Expected note/duration pairs")
+            }
 
             val frequencies: List<Double> = parts.filterIndexed { index, _ -> index % 2 == 0 }.map {
                 PianoNotes[it] ?: throw MeasureParseException(measureIndex, "Invalid note \"${it}\"");
